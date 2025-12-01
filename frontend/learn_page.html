@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Modules</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        .learn-container {
+            max-width: 960px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            border-bottom: 2px solid #555555;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .module-section {
+            display: flex;
+            align-items: center; /* Vertically center items in the row */
+            margin-bottom: 60px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .module-section:nth-child(even) { /* For even sections (2nd, 4th, etc.) */
+            flex-direction: row-reverse; /* Swap order for zig-zag effect */
+            background-color: #f0f0f0; /* Slightly different background for contrast */
+        }
+
+        .module-content {
+            flex: 1; /* Takes up available space */
+            padding: 0 20px;
+        }
+
+        .module-image {
+            flex-shrink: 0; /* Prevent image from shrinking */
+            width: 300px; /* Fixed width for the image */
+            height: auto;
+            border: 1px solid #888;
+            box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .module-image img {
+            max-width: 100%;
+            height: auto;
+            display: block; /* Remove extra space below image */
+        }
+
+        h2 {
+            color: #555555;
+            margin-top: 0;
+            border-bottom: 1px dashed #aaaaaa;
+            padding-bottom: 10px;
+        }
+
+        ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        a.learn-more-btn {
+            display: inline-block;
+            background-color: #333333;
+            color: #ffffff;
+            padding: 8px 15px;
+            text-decoration: none;
+            border: 1px solid #000000;
+            margin-top: 15px;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        a.learn-more-btn:hover {
+            background-color: #555555;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="learn-container">
+        <h1>Learn About Digital Forensics Modules</h1>
+
+        <div class="module-section">
+            <div class="module-content">
+                <h2>📁 File Analysis: Unmasking Threats</h2>
+                <p>Learn the foundational techniques for examining suspicious files. This module covers:</p>
+                <ul>
+                    <li>Identifying true file types (even if disguised).</li>
+                    <li>Generating cryptographic hashes for threat intelligence.</li>
+                    <li>Extracting embedded strings and indicators of compromise.</li>
+                    <li>Understanding the basics of sandbox analysis.</li>
+                </ul>
+                <a href="/analisis_file.html" class="learn-more-btn">More about File Analysis</a>
+            </div>
+            <div class="module-image">
+                <img src="https://via.placeholder.com/300x200?text=File+Analysis" alt="File Analysis Icon">
+            </div>
+        </div>
+
+        <div class="module-section">
+            <div class="module-content">
+                <h2>📝 Metadata Investigation: Tracing Digital Footprints</h2>
+                <p>Dive into the hidden data within files. Discover how to:</p>
+                <ul>
+                    <li>Extract EXIF data from images (camera model, GPS).</li>
+                    <li>Analyze creation/modification timestamps for inconsistencies.</li>
+                    <li>Uncover author and software information from documents.</li>
+                    <li>Use metadata to build a timeline of events.</li>
+                </ul>
+                <a href="/metadata_investigation.html" class="learn-more-btn">Practice Metadata Investigation</a>
+            </div>
+            <div class="module-image">
+                <img src="https://via.placeholder.com/300x200?text=Metadata" alt="Metadata Investigation Icon">
+            </div>
+        </div>
+
+        <div class="module-section">
+            <div class="module-content">
+                <h2>🌐 Digital Footprint: OSINT for Investigators</h2>
+                <p>Explore the art of Open-Source Intelligence (OSINT) to profile individuals or entities:</p>
+                <ul>
+                    <li>Enumerating usernames across social media.</li>
+                    <li>Checking emails for data breaches.</li>
+                    <li>Performing advanced search engine queries.</li>
+                    <li>Understanding public records and online presence.</li>
+                </ul>
+                <a href="/digital_footprint.html" class="learn-more-btn">Practice Digital Footprint</a>
+            </div>
+            <div class="module-image">
+                <img src="https://via.placeholder.com/300x200?text=OSINT" alt="Digital Footprint Icon">
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

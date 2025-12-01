@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Lab</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-content">
+            <a href="#" class="header-logo" data-page="logo">
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="VirtualSec Lab Logo" class="logo-image" />
+            </a>
+
+            <nav class="header-nav">
+                <ul>
+                    <li><a href="#" class="nav-link" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="learn">Learn</a></li>
+                    <li><a href="#" class="nav-link" data-page="practice">Practice</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside id="sidebar" class="sidebar">
+            <h2>Practice Modules</h2>
+            <div id="module-list-wrapper">
+                <nav>
+                    <ul>
+                        <li><a href="#" class="module-link" data-module="file-analysis">📁 File Analysis</a></li>
+                        <li><a href="#" class="module-link" data-module="metadata-investigation">📝 Metadata Investigation</a></li>
+                        <li><a href="#" class="module-link" data-module="digital-footprint">🌐 Digital Footprint</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <main id="main-content" class="content-area">
+
+            <div id="initial-welcome" style="display:none; padding: 30px;">
+                <h2>Select a Module to Begin</h2>
+                <p>Choose a module from the left panel to load the scenario and investigation tools.</p>
+            </div>
+
+            <div id="vm-launch-control" class="vm-control-box" style="display:none; padding: 30px; text-align: center;">
+                <h3>Ready to Begin Investigation?</h3>
+                <p>The scenario is loaded. Click below to launch the Virtual Machine and begin your hands-on analysis.</p>
+                <button id="start-vm-btn" class="start-vm-default-btn">🚀 Start VM</button>
+            </div>
+                
+            <div id="split-view-wrapper" class="split-wrapper" style="display:none;">
+                    
+                <div id="scenario-pane" class="split-pane">
+                    <iframe id="module-iframe" class="full-iframe"></iframe>
+                </div>
+
+                <div id="vm-pane" class="split-pane">
+                    <iframe id="vm-iframe" src="http://localhost:8080/guacamole" class="full-iframe"></iframe>
+                </div>
+
+            </div>
+            
+            <iframe id="full-page-iframe" class="full-iframe" style="display:none;"></iframe>
+            
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const moduleLinks = document.querySelectorAll('.module-link');
+            const sidebar = document.getElementById('sidebar');
+            const vmButton = document.getElementById('start-vm-btn');
+            const mainContent = document.getElementById('main-content');
+            const startVM = document.getElementById('/start_vm');
+            const stopVM = document.getElementById('/stop_vm');
+
+            // Header menu elements
+            const headerLogo = document.querySelector('.header-logo');
+            const homeNav = document.querySelector('.header-nav ul li:nth-child(1) a');
+            const learnNav = document.querySelector('.header-nav ul li:nth-child(2) a');
+            const practiceNav = document.querySelector('.header-nav ul li:nth-child(3) a');
+            
+            // Split view elements
+            const initialWelcome = document.getElementById('initial-welcome');
+            const vmLaunchControl = document.getElementById('vm-launch-control');
+            const splitViewWrapper = document.getElementById('split-view-wrapper');
+            const moduleIframe = document.getElementById('module-iframe');
+            const fullPageIframe = document.getElementById('full-page-iframe');
+            
+            // Sidebar module list wrapper
+            const moduleListWrapper = document.getElementById('module-list-wrapper');
+
+            // Mappings
+            const modulePaths = {
+                'file-analysis': '/file_analysis.html',
+                'metadata-investigation': '/metadata_investigation.html',
+                'digital-footprint': '/digital_footprint.html'
+            };
+
+            window.openPracticeModule = function() {
+                if (practiceNav) {
+                    practiceNav.click();
+                } else {
+                    moduleListWrapper.style.display = 'block';
+                    setDisplayState('welcome');
+                }
+            };
+
+            window.startStopVM = function(action) {
+                const url = action === 'start' ? '/start_vm' : '/stop_vm';
+                const isStart = action === 'start';
+
+                vmButton.disabled = true;
+                vmButton.textContent = isStart ? 'Starting VM... Please wait.' : 'Stopping VM... Please wait.';
+
+                fetch(url, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        if (isStart) {
+                            vmButton.textContent = 'VM Running (View Split)';
+                            vmButton.classList.add('vm-running', 'vm-failed');
+
+                            setTimeout(() => {
+                                setDisplayState('split_view');
+                            }, 1000);
+                        } else {
+                            alert('VM Services Stopped.');
+
+                            vmButton.textContent = '🚀 Start VM';
+                            vmButton.classList.remove('vm-running', 'vm-failed');
+
+                            const moduleId = mainContent.getAttribute('data-active-module');
+                            setDisplayState('module_prepare', moduleId);
+                        }
+                    } else {
+                        alert(`❌ VM Error during' ${action}: ${data.message}`);
+                        vmButton.textContent = `🚀 Start VM (Failed)`;
+                        vmButton.classList.add('vm-failed');
+                    }
+                })
+                .catch(error => {
+                    alert(`⚠️ Network Error during ${action}: Could not reach the server.`);
+                    vmButton.textContent = `🚀 Start VM ${action} Error`
+                    vmButton.classList.add('vm-failed');
+                })
+                .finally(() => {
+                    vmButton.disabled = false;
+                });
+            };
+
+            // --- GENERAL HEADER LINK FUNCTION ---
+            function setupGeneralHeaderLinks(link, modulePath) {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    setDisplayState('full_page_view');
+                    fullPageIframe.src = modulePath;
+                    moduleListWrapper.style.display = 'none';
+                });
+            }
+
+            // Assign event listeners to header navigation
+            if (headerLogo) setupGeneralHeaderLinks(headerLogo, '/landing_page.html');
+            if (homeNav) setupGeneralHeaderLinks(homeNav, '/landing_page.html');
+            if (learnNav) setupGeneralHeaderLinks(learnNav, '/learn_page.html');
+
+            if (practiceNav) {
+                practiceNav.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    moduleListWrapper.style.display = 'block';
+                    setDisplayState('welcome');
+                });
+            }
+            
+            // --- STATE MACHINE HELPER ---
+            function setDisplayState(state, moduleId = null) {
+                // 1. Reset all views
+                sidebar.style.display = 'none';
+                initialWelcome.style.display = 'none';
+                vmLaunchControl.style.display = 'none';
+                splitViewWrapper.style.display = 'none';
+                moduleIframe.style.display = 'none';
+                fullPageIframe.style.display = 'none'; // Essential reset for full screen iframe
+                
+                // 2. Apply state-specific changes
+                if (state === 'full_page_view') {
+                    // State for Home and Learn (full screen)
+                    fullPageIframe.style.display = 'block';
+
+                } else if (state === 'welcome') {
+                    // State 2: Practice menu clicked (Sidebar visible)
+                    sidebar.style.display = 'flex';
+                    sidebar.style.width = '250px';
+                    initialWelcome.style.display = 'block';
+
+                } else if (state === 'module_load' && moduleId) {
+                    // State 3: Module selected, preparing for VM start
+                    sidebar.style.display = 'none'; 
+                    vmLaunchControl.style.display = 'flex'; 
+                    
+                    // Load the scenario into the split-view iframe (it's hidden by default)
+                    moduleIframe.src = modulePaths[moduleId];
+
+                } else if (state === 'split_view') {
+                    // State 4: Split view active (VM running)
+                    sidebar.style.display = 'none';
+                    vmLaunchControl.style.display = 'none';
+                    splitViewWrapper.style.display = 'grid'; 
+                    moduleIframe.style.display = 'block'; // Ensure scenario pane content is visible
+                }
+            }
+
+            // --- Module Link Logic (State 3: Module Prepare) ---
+            moduleLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const moduleId = link.getAttribute('data-module');
+                    mainContent.setAttribute('data-active-module', moduleId);
+                    setDisplayState('module_load', moduleId);
+                });
+            });
+
+            // --- VM Button Logic (State 4: Split View) ---
+            vmButton.addEventListener('click', () => {
+                if (vmButton.textContent.includes('VM Running')) {
+                    setDisplayState('split-view');
+                } else {
+                    window.startStopVM('start');
+                }
+            });
+            
+            // --- INITIAL LANDING SETUP (Requirement 1) ---
+            moduleListWrapper.style.display = 'none';
+            
+            // Set initial state to full-page view and load the Learn page
+            setDisplayState('full_page_view');
+            fullPageIframe.src = '/landing_page.html';
+        });
+    </script>
+
+</body>
+</html>

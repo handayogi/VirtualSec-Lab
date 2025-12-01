@@ -1,0 +1,14 @@
+{
+  "guacamoleVersion": "1.6.0",
+  "users": [
+    {
+      "username": "eegoy",
+      "password": "say4adm1nx!",
+      "connections": [],
+      "access": [
+        { "type": "system", "identifier": "SYSTEM_ADMINISTRATOR", "accessLevel": "READ" },
+        { "type": "connection", "identifier": "ROOT", "accessLevel": "ADMINISTER" }
+      ]
+    }
+  ]
+}

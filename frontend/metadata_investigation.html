@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metadata Investigation Scenario</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px; 
+            background-color: #ffffff; 
+            color: #333333;
+        }
+        h2 { border-bottom: 2px solid #555555; padding-bottom: 10px; margin-bottom: 20px; }
+        ol { padding-left: 25px; }
+        li { margin-bottom: 15px; line-height: 1.5; }
+        .tool-box { border: 1px solid #888888; padding: 20px; margin-top: 20px; background-color: #f0f0f0; }
+        .vm-instruction { font-weight: bold; color: #cc0000; }
+    </style>
+</head>
+<body>
+
+    <h2>📝 Scenario: Investigating Image Origin (EXIF)</h2>
+    
+    <p>You received an image named <code>evidence.jpg</code> linked to a recent incident. Your objective is to extract hidden metadata to determine the camera model, creation time, and geolocation.</p>
+
+    <ol>
+        <li><span class="vm-instruction">Launch the VM:</span> Click the **VM Running** button on the left to start your remote desktop session.</li>
+        <li>**Transfer File:** Imagine transferring <code>evidence.jpg</code> to your VM.</li>
+        <li>**EXIF Data Extraction:** Open a terminal in the VM and use **ExifTool** (a powerful metadata analyzer, pre-installed in Kali) to dump all information:
+            <pre><code>exiftool ~/Desktop/evidence.jpg</code></pre></li>
+        <li>**Filtered Search:** Filter the output to look specifically for camera and GPS information:
+            <pre><code>exiftool -Model -DateTimeOriginal -GPSPosition ~/Desktop/evidence.jpg</code></pre></li>
+        <li>**Geolocation Mapping:** If coordinates are found, note the Latitude and Longitude for external mapping.</li>
+    </ol>
+    
+    <div class="tool-box">
+        <h3>Task Summary</h3>
+        <p>Complete the extraction inside the VM. Identify the camera model and determine if any GPS coordinates are present in the output.</p>
+    </div>
+
+</body>
+</html>

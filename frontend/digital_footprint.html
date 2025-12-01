@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Footprint Investigation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Courier New', Courier, monospace;
+            padding: 20px; 
+            background-color: #ffffff; 
+            color: #333333;
+        }
+        h2 { border-bottom: 2px solid #555555; padding-bottom: 10px; margin-bottom: 20px; }
+        ol { padding-left: 25px; }
+        li { margin-bottom: 15px; line-height: 1.5; }
+        .tool-box { border: 1px solid #888888; padding: 20px; margin-top: 20px; background-color: #f0f0f0; }
+        .vm-instruction { font-weight: bold; color: #cc0000; }
+    </style>
+</head>
+<body>
+
+    <h2>🌐 Scenario: OSINT Target Profiling (Username Enumeration)</h2>
+    
+    <p>You have been given the target username <code>johnny_cyber</code>. Your objective is to use a powerful OSINT tool inside the VM to find all associated social media accounts.</p>
+
+    <ol>
+        <li><span class="vm-instruction">Launch the VM:</span> Click the **VM Running** button on the left to start your remote desktop session.</li>
+        <li>**Open Terminal:** Navigate to the folder containing the **Sherlock** script (or install it if necessary).</li>
+        <li>**Execute Sherlock:** Run the script from the terminal to search for the username across hundreds of websites:
+            <pre><code>python3 sherlock johnny_cyber</code></pre></li>
+        <li>**Analyze Results:** Review the output to identify active and inactive accounts. Look for successful hits (green lines) that provide direct links to user profiles.</li>
+        <li>**Passive Searching:** Use the VM's browser to perform a targeted Google search on the username, noting any unique public documents or forum posts.</li>
+    </ol>
+    
+    <div class="tool-box">
+        <h3>Task Summary</h3>
+        <p>Complete the enumeration inside the VM. List the top three social media platforms where the username <code>johnny_cyber</code> was found to be active.</p>
+    </div>
+
+</body>
+</html>
