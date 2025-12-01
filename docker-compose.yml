@@ -10,7 +10,6 @@ services:
       - ./guacamole_extensions:/opt/guacamole/extensions
     environment:
       EXTENSION_PRIORITY: noauth
-      
       LOG_LEVEL: DEBUG
 
   guacd:
