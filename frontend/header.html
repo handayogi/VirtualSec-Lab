@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sora:wght@100..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-content">
+            <a href="/" class="header-logo" data-page="logo">
+            <span class="logo-text">VirtualSec Lab</span>
+            </a>
+
+            <nav class="header-nav">
+            <ul>
+                <li><a href="/" class="nav-link" data-page="home">Home</a></li>
+                <li><a href="/learn" class="nav-link" data-page="learn">Learn</a></li>
+                <li><a href="/practice" class="nav-link" data-page="practice">Practice</a></li>
+            </ul>
+            </nav>
+        </div>
+    </header>
+
+</body>
+</html>

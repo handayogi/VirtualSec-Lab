@@ -1,62 +1,88 @@
-/* VirtualLab/frontend/src/style.css */
-
-/* --- GENERAL & BODY STYLES --- */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    font-family: 'Courier New', Courier, monospace;
-    color: #333333;
+/* ----------------------------------
+   GLOBAL STYLES
+---------------------------------- */
+::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
 }
 
-/* --- HEADER STYLING --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    /* Scrollable Things */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    height: 100%;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #22a0db 0%, #0347d7 100%);
+    background-attachment: fixed;
+    color: #1a1a1a;
+}
+
+h1, h2, h3 {
+    font-family: 'Sora', sans-serif;
+}
+
+/* ----------------------------------
+   HEADER
+---------------------------------- */
 .main-header {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 1000;
     height: 90px;
-    background-color: #191d22;
-    text-align: center;
+    z-index: 1000;
+    background: rgba(26, 31, 36, 0.7);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    transition: 0.25 ease;
+}
+
+.main-header.scrolled {
+    background: rgba(10, 12, 16, 0.85);
+    height: 70px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.4);
+    transition: 0.25s ease;
+}
+
+.main-header.scrolled .logo-text {
+    font-size: 32px;
+    transition: 0.25s ease;
 }
 
 .header-content {
+    max-width: 1000px;
+    height: 100%;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
 }
 
 .header-logo {
     display: flex;
-    text-decoration: none;
     align-items: center;
+    text-decoration: none;
     padding: 5px 0;
 }
 
-.logo-image {
-    max-height: 70px;
-    width: auto;
-    margin-right: 20px;
-}
-
 .logo-text {
-    color: #cdddff;
-    font-weight: bold;
-    font-size: 24px;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    color: #fff;
+    transition: 0.25 ease;
 }
 
-/* --- NAVIGATION MENU STYLING --- */
+/* NAVIGATION */
 .header-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
     display: flex;
+    list-style: none;
 }
 
 .header-nav li {
@@ -65,184 +91,143 @@ html, body {
 
 .header-nav .nav-link {
     text-decoration: none;
-    color: #cdddff;
-    font-weight: bold;
+    color: #fff;
+    font-weight: 700;
     font-size: 16px;
     padding: 5px 10px;
     border-bottom: 2px solid transparent;
-    transition: border-bottom 0.2s, color 0.2s;
-    font-family: 'Courier New', Courier, monospace;
+    transition: 0.2s;
 }
 
 .header-nav .nav-link:hover,
 .header-nav .nav-link:focus {
-    border-bottom: 2px solid #39ff14;
-    color: #00e4ff;
+    color: #90e0ef;
+    border-bottom-color: #90e0ef;
 }
 
-/* --- CONTAINER LAYOUT --- */
-.container {
-    margin-top: 90px;
+/* ----------------------------------
+   LAYOUT
+---------------------------------- */
+.landing-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    padding-top: 180px;
+}
+
+/* ----------------------------------
+   LANDING PAGE SECTION
+---------------------------------- */
+.landing-section {
     display: flex;
-    height: calc(100vh - 90px);
-    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 60px 40px;
+    margin-bottom: 50px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* --- SIDEBAR STYLING --- */
-.sidebar {
-    width: 250px;
-    min-width: 250px;
-    padding: 20px;
-    background-color: #cccccc;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    border-right: 2px solid #323232;
-    display: flex;
-    flex-direction: column;
-    color: #333333;
+.landing-card {
+    flex: 1;
+    padding-right: 40px;
 }
 
-.sidebar h2 {
-    color: #333333;
-    margin-top: 0;
-    border-bottom: 2px solid #555555;
-    padding-bottom: 10px;
+.landing-card h1 {
+    font-size: 40px;
+    line-height: 1.15;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #f1f4ee;
 }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 30px;
-}
-
-.sidebar li {
-    margin: 10px 0;
-}
-
-.sidebar a {
-    text-decoration: none;
-    color: #333333; /* Dark text for links */
-    display: block;
-    padding: 10px;
-    border-radius: 3px; /* Slightly less rounded for retro */
-    transition: background-color 0.2s, color 0.2s;
-    border: 1px solid transparent; /* Default transparent border */
-}
-
-.sidebar a:hover, .sidebar a:focus {
-    background-color: #555555; /* Dark background on hover */
-    color: #ffffff; /* White text on hover */
-    border-color: #333333; /* Darker border on hover */
-}
-
-/* --- START VM BUTTON --- */
-#start-vm-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #333333; /* Dark gray button background */
-    color: #ffffff; /* White text */
-    border: 2px solid #000000; /* Solid black border for retro button */
-    border-radius: 3px;
-    cursor: pointer;
+.landing-card p {
     font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-    font-family: 'Courier New', Courier, monospace;
+    line-height: 1.6;
+    color: #cdcdcd;
+    text-align: justify;
+    margin-right: 20px;
 }
 
-#start-vm-btn:hover {
-    background-color: #555555; /* Slightly lighter dark gray on hover */
-    border-color: #333333;
-}
-
-/* Specific styles for VM running/failure states */
-#start-vm-btn.vm-running { /* You'll need to add this class with JS */
-    background-color: #555555; /* Indicate running with a different shade */
-    border-color: #333333;
-}
-
-#start-vm-btn.vm-failed { /* You'll need to add this class with JS */
-    background-color: #dc3545; /* Red for failure */
-    border-color: #a00000;
-}
-
-.start-vm-default-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #333333; /* Dark gray button background */
-    color: #ffffff; /* White text */
-    border: 2px solid #000000; /* Solid black border for retro button */
-    border-radius: 3px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-    font-family: 'Courier New', Courier, monospace;
-}
-
-#module-list-wrapper {
-    display: none;
-}
-
-/* --- CONTENT AREA STYLING --- */
-.content-area {
-    flex-grow: 1;
-    height: 100%;
-    padding: 0; /* Remove padding when iframe is active */
-    background-color: #ffffff; /* White background for the main content */
-    overflow-y: hidden; /* Hide overflow for iframe */
-    overflow-x: hidden;
-    color: #333333; /* Dark text for content */
-}
-
-/* --- IFRAME STYLES --- */
-.full-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-}
-
-.vm-control-box {
-    width: 100%;
-    height: 100%;
+.virtual-machine {
+    width: 300px;
+    height: 200px;
+    background: rgba(0, 0, 0, 0.1);
+    border: 5px solid #323232;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
 }
 
-.split-wrapper {
+/* ----------------------------------
+   CARDS
+---------------------------------- */
+.card-section {
+    text-align: center;
+}
+
+.card-section h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    padding-bottom: 5px;
+    display: inline-block;
+    color: #f1f4ee;
+    border-bottom: 2px solid #eee;
+}
+
+.card-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    height: 100%;
-    gap: 1px;
-    border-left: 1px solid #888888; /* Border between sidebar and content */
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
 }
 
-.split-pane {
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 25px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.4s ease-in-out;
 }
 
-#vm-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff;
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
 }
 
-#module-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    display: block;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff;
+.card h3 {
+    font-size: 21px;
+    font-weight: 700;
+    color: #90e0ef;
+    margin-bottom: 5px;
+    text-align: start;
+}
+
+.card p {
+    flex-grow: 1;
+    font-size: 16px;
+    line-height: 1.6;
+    padding: 10px 0;
+    color: #eee;
+    text-align: left;
+}
+
+.card a.nav-link {
+    display: inline-block;
+    padding-top: 10px;
+    color: #1d3557;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Sora', sans-serif;
+    text-decoration: none;
+    text-align: start;
+}
+
+.card a.nav-link:hover {
+    color: #90e0ef;
 }

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metadata Investigation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sora:wght@100..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .container {
+            max-width: 1000px;
+            margin: 80px auto;
+            padding: 120px 40px;
+            border-radius: 10px;
+        }
+
+        .back {
+            display: inline-block;
+            font-family: 'Sora', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #90e0ef;
+            margin-top: -80px;
+            margin-bottom: 40px;
+            transition: color 0.2 ease;
+        }
+
+        .back:hover{
+            color: #b3f4ff;
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 42px;
+            color: #eaf3ff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 20px;
+            color: #c8d8ee;
+        }
+
+        .section-title {
+            margin-top: 50px;
+            font-size: 26px;
+            border-left: 5px solid #90e0ef;
+            padding-left: 15px;
+            color: #90e0ef;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 15px;
+            border: none;
+        }
+
+        table, th, td {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #c8d8ee;
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 10px;
+            text-align: left;
+            font-weight: 700;
+            color: #90e0ef;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 10px;
+            vertical-align: top;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Card Section */
+        .learn-container-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
+        }
+
+        .learn-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s;
+            color: #eaf3ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .learn-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .learn-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #90e0ef;
+        }
+
+        .learn-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #c8d8ee;
+            margin-bottom: 20px;
+        }
+
+        .learn-card button {
+            background: #90e0ef;
+            color: #1d3557;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            transition: background 0.2s, transform 0.2s;
+            margin-top: auto;
+        }
+
+        .learn-card button:hover {
+            background: #b3f4ff;
+            transform: scale(0.98);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    {% include "header.html" %}
+
+    <div class="container content">
+
+        <a href="/learn" class="back">
+            ⮜ Back
+        </a>
+
+        <h1>Metadata Investigation: Revealing Hidden Informations</h1>
+
+        <p>
+            Metadata investigation adalah proses pemeriksaan informasi tersembunyi yang melekat pada sebuah file, seperti tanggal pembuatan, 
+            perangkat yang digunakan, lokasi geografis, versi aplikasi, hingga histori perubahan. Metadata sering kali menjadi kunci utama 
+            dalam proses digital forensic karena dapat mengungkap konteks yang tidak terlihat dari isi file itu sendiri. Misalnya, sebuah 
+            gambar mungkin terlihat biasa, tetapi metadata-nya dapat menunjukkan GPS lokasi foto diambil, model kamera, timestamp, bahkan software 
+            yang memodifikasinya.
+        </p>
+
+        <p>
+            Dalam investigasi digital, metadata membantu analis memverifikasi keaslian file, membangun timeline kejadian, mengidentifikasi pelaku 
+            atau perangkat yang digunakan, dan mendeteksi upaya manipulasi. Metadata juga sangat penting ketika menghadapi kasus pencurian data, 
+            pemalsuan dokumen, investigasi kejadian kriminal, hingga serangan siber. Dengan memanfaatkan tools forensik seperti <b>exiftool</b>, 
+            <b>mat2</b>, atau <b>exiv2</b>, metadata dapat dianalisis secara lebih cepat, akurat, dan menyeluruh.
+        </p>
+
+        <h2 class="section-title">Ruang Lingkup Metadata Investigation</h2>
+        
+        <table>
+            <tr>
+                <th>Kategori Metadata</th>
+                <th>Contoh Informasi</th>
+                <th>Manfaat Investigasi</th>
+            </tr>
+            <tr>
+                <td>File System Metadata</td>
+                <td>Timestamp (Created, Modified, Accessed), file owner, permission</td>
+                <td>Membangun timeline kejadian dan memvalidasi apakah file dimodifikasi</td>
+            </tr>
+            <tr>
+                <td>Document Metadata</td>
+                <td>Author, revision history, application version</td>
+                <td>Menemukan siapa pembuat dokumen dan mendeteksi manipulasi atau editing</td>
+            </tr>
+            <tr>
+                <td>Image Metadata (EXIF)</td>
+                <td>GPS location, camera model, lens info, date-taken</td>
+                <td>Mengidentifikasi lokasi kejadian dan verifikasi keaslian foto</td>
+            </tr>
+            <tr>
+                <td>Application Metadata</td>
+                <td>Software signatures, embedded versioning</td>
+                <td>Melacak sumber pembuatan file, menemukan aplikasi yang digunakan</td>
+            </tr>
+            <tr>
+                <td>Network Metadata</td>
+                <td>IP address, host information</td>
+                <td>Melacak sumber akses atau aktivitas jaringan</td>
+            </tr>
+            <tr>
+                <td>Embedded Metadata</td>
+                <td>Hidden strings, checksum, internal markers</td>
+                <td>Menemukan indikasi malware, atau hidden content</td>
+            </tr>
+        </table>
+
+        <h2 class="section-title">Tools for Metadata Investigation</h2>
+        <table>
+            <tr>
+                <th>Tools</th>
+                <th>Fungsi</th>
+                <th>Jenis File</th>
+            </tr>
+            <tr>
+                <td>ExifTool</td>
+                <td>Membaca seluruh metadata, termasuk EXIF, IPTC, XMP, dan lainnya.</td>
+                <td>Gambar, dokumen, video, audio</td>
+            </tr>
+            <tr>
+                <td>Exiv2</td>
+                <td>Analisis dan modifikasi metadata gambar</td>
+                <td>Gambar (JPG/RAW)</td>
+            </tr>
+            <tr>
+                <td>Mat2 (Metadata Anonymization Toolkit)</td>
+                <td>Analisis dan menghapus metadata sensitif</td>
+                <td>Office, PDF, gambar</td>
+            </tr>
+            <tr>
+                <td>PDFinfo / PDFid</td>
+                <td>Melihat metadata dan properti PDF</td>
+                <td>PDF</td>
+            </tr>
+            <tr>
+                <td>Strings</td>
+                <td>Mengambil string tersembunyi—indikator malware</td>
+                <td>File biner</td>
+            </tr>
+        </table>
+
+        <div class="learn-container-card">
+
+            <div class="learn-card">
+                <h3>Back to File Analysis</h3>
+                <p>
+                    Kembali ke modul File Analysis untuk mempelajari lebih lanjut tentang teknik dan
+                    tools - tools yang digunakan dalam File Analysis.
+                </p>
+                <button data-page="file-analysis">Back</button>
+            </div>
+            
+            <div class="learn-card">
+                <h3>Proceed to Practice</h3>
+                <p>
+                    Mulai investigasi langsung dalam virtual machine menggunakan dataset forensik real.
+                    Modul praktik ini mengarahkan Anda melalui langkah-langkah analisis yang terstruktur.
+                </p>
+                <button data-page="practice">Practice</button>
+            </div>
+
+            <div class="learn-card">
+                <h3>Digital Footprints</h3>
+                <p>
+                    Pelajari bagaimana log sistem, jejak aplikasi, dan data yang tersimpan dapat membantu 
+                    mengidentifikasi perilaku dan tindakan pengguna pada sistem.
+                </p>
+                <button data-page="footprint">Continue</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>

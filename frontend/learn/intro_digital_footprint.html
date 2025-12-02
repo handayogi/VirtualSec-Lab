@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Footprint</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Sora:wght@100..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .container {
+            max-width: 1000px;
+            margin: 80px auto;
+            padding: 120px 40px;
+            border-radius: 10px;
+        }
+
+        .back {
+            display: inline-block;
+            font-family: 'Sora', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #90e0ef;
+            margin-top: -80px;
+            margin-bottom: 40px;
+            transition: color 0.2 ease;
+        }
+
+        .back:hover{
+            color: #b3f4ff;
+        }
+
+        h1 {
+            margin-top: 0;
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 42px;
+            color: #eaf3ff;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 17px;
+            line-height: 1.8;
+            text-align: justify;
+            margin-bottom: 20px;
+            color: #c8d8ee;
+        }
+
+        .section-title {
+            margin-top: 50px;
+            font-size: 26px;
+            border-left: 5px solid #90e0ef;
+            padding-left: 15px;
+            color: #90e0ef;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 15px;
+            border: none;
+        }
+
+        table, th, td {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #c8d8ee;
+        }
+
+        th {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 10px;
+            text-align: left;
+            font-weight: 700;
+            color: #90e0ef;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 10px;
+            vertical-align: top;
+        }
+
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Card Section */
+        .learn-container-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
+        }
+
+        .learn-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s;
+            color: #eaf3ff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .learn-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 25px rgba(0,0,0,0.5);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .learn-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #90e0ef;
+        }
+
+        .learn-card p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #c8d8ee;
+            margin-bottom: 20px;
+        }
+
+        .learn-card button {
+            background: #90e0ef;
+            color: #1d3557;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-size: 15px;
+            font-weight: 700;
+            transition: background 0.2s, transform 0.2s;
+            margin-top: auto;
+        }
+
+        .learn-card button:hover {
+            background: #b3f4ff;
+            transform: scale(0.98);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    {% include "header.html" %}
+
+    <div class="container content">
+
+        <a href="/learn" class="back">
+            ⮜ Back
+        </a>
+
+        <h1>Digital Footprint: OSINT for Investigators</h1>
+
+        <p>
+            Jejak digital (digital footprint) merujuk pada kumpulan data yang ditinggalkan oleh seseorang atau entitas ketika 
+            menggunakan perangkat digital, aplikasi, maupun internet. Dalam konteks digital forensics dan cyber investigation, 
+            jejak digital menjadi salah satu sumber informasi paling berharga untuk mengungkap identitas pelaku, memetakan 
+            aktivitas, menganalisis hubungan antar-entitas, hingga memverifikasi kebenaran suatu kejadian.
+        </p>
+
+        <p>
+            Teknik <b>Open-Source Intelligence</b> (OSINT) menjadi metode yang sangat kuat untuk menggali jejak digital karena mengandalkan 
+            data yang tersedia secara publik—tanpa akses ilegal, tanpa eksploitasi, dan sepenuhnya sah digunakan dalam investigasi. 
+            Melalui OSINT, investigator dapat melakukan pengumpulan informasi dari media sosial, situs web, basis data publik, metadata 
+            online, arsip internet, hingga aktivitas jaringan.
+        </p>
+        <p>
+            Dalam praktiknya, OSINT bukan hanya sekadar mengumpulkan data, tetapi juga menganalisis pola, timeline, konektivitas antar akun, 
+            lokasi aktivitas, serta perubahan perilaku digital. Pendekatan ini penting untuk membangun profil lengkap dalam penyelidikan cybercrime, 
+            seperti phishing, doxing, penipuan online, rekayasa sosial, kebocoran data, dan investigasi identitas anonim.
+        </p>
+
+        <h2 class="section-title">Ruang Lingkup Digital Footprint Investigation</h2>
+        
+        <table>
+            <tr>
+                <th>Kategori Jejak Digital</th>
+                <th>Contoh Informasi</th>
+                <th>Manfaat Investigasi</th>
+            </tr>
+            <tr>
+                <td>Media Sosial</td>
+                <td>Nama akun, posting, interaksi, lokasi, foto</td>
+                <td>Mengidentifikasi pelaku, memetakan aktivitas, menemukan keterkaitan</td>
+            </tr>
+            <tr>
+                <td>Email Footprint</td>
+                <td>Header email, IP sent, provider, domain</td>
+                <td>Menelusuri asal email, menganalisis phishing, memverifikasi identitas</td>
+            </tr>
+            <tr>
+                <td>Username Footprint</td>
+                <td>Username reuse di banyak platform</td>
+                <td>Mencari akun lain milik individu, memetakan identitas online</td>
+            </tr>
+            <tr>
+                <td>Website Footprint</td>
+                <td>WHOIS, DNS records, SSL, server information</td>
+                <td>Mengidentifikasi pemilik website, server, lokasi hosting</td>
+            </tr>
+            <tr>
+                <td>File Online Metadata</td>
+                <td>EXIF foto, timestamp dokumen</td>
+                <td>Menganalisis lokasi pengambilan foto, sumber pembuatan file</td>
+            </tr>
+            <tr>
+                <td>Network Footprint</td>
+                <td>IP address, Port, traceroutes</td>
+                <td>Melacak asal koneksi, mendeteksi aktivitas jaringan mencurigakan</td>
+            </tr>
+            <tr>
+                <td>Historical Footprint</td>
+                <td>Archive.org, cached pages</td>
+                <td>Melihat versi lama situs, posting yang telah dihapus</td>
+            </tr>
+            <tr>
+                <td>Data Breach Footprint</td>
+                <td>Email/password leak, credential exposure</td>
+                <td>Identifikasi kebocoran data dan risiko keamanan</td>
+            </tr>
+        </table>
+
+        <h2 class="section-title">Tools OSINT</h2>
+        <table>
+            <tr>
+                <th>Tools/Platform</th>
+                <th>Fungsi</th>
+                <th>Kegunaan dalam Investigasi</th>
+            </tr>
+            <tr>
+                <td>Maltego</td>
+                <td>Relationship graphing</td>
+                <td>Memetakan koneksi antar akun, domain, email</td>
+            </tr>
+            <tr>
+                <td>PhoneInfoga</td>
+                <td>Phone number lookup</td>
+                <td>Investigasi nomor telepon mencurigakan</td>
+            </tr>
+            <tr>
+                <td>HaveIBeenPwned</td>
+                <td>Data breach checker</td>
+                <td>Mengecek email/username yang bocor</td>
+            </tr>
+            <tr>
+                <td>Sherlock</td>
+                <td>Username lookup multi-platform</td>
+                <td>Melacak username yang sama dibanyak situs</td>
+            </tr>
+            <tr>
+                <td>theHarvester</td>
+                <td>Email, domain, subdomain enumeration</td>
+                <td>Investigasi awal domain & organisasi</td>
+            </tr>
+        </table>
+
+        <div class="learn-container-card">
+
+            <div class="learn-card">
+                <h3>Back to Metadata Investigations</h3>
+                <p>
+                    Kembali ke modul Metadata Investigations untuk mempelajari lebih lanjut tentang teknik dan
+                    tools - tools yang digunakan dalam Metadata Investigations.
+                </p>
+                <button data-page="metadata">Back</button>
+            </div>
+            
+            <div class="learn-card">
+                <h3>Proceed to Practice</h3>
+                <p>
+                    Mulai investigasi langsung dalam virtual machine menggunakan dataset forensik real.
+                    Modul praktik ini mengarahkan Anda melalui langkah-langkah analisis yang terstruktur.
+                </p>
+                <button data-page="practice">Practice</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+
+</body>
+</html>
